@@ -3,8 +3,6 @@ import java.util.List;
 
 public class Task4 {
   public static void main(String[] args) {
-    double count = 0;
-
     List<Double> prices = new ArrayList<>();
     prices.add(199.99);
     prices.add(450.50);
@@ -13,22 +11,19 @@ public class Task4 {
     prices.add(310.10);
 
     double budget = 800.00;
-    int products = 0;
-    double remainingBudget;
-    int notBuying;
+    double spent = 0;
+    int bought = 0;
 
-    for (int i = 0; i < prices.size(); i++) {
-      products++;
-      count += prices.get(i);
-      remainingBudget = budget - count;
-      notBuying = 5 - products;
-      if (count >= budget) {
+    for (double price : prices) {
+      if (spent + price > budget) {
         break;
       }
-      System.out.println("Куплено товаров " + products + " на сумму " + count);
-      System.out.println("Остаток бюджета: " + remainingBudget);
-      System.out.println("Не куплено: " + notBuying);
-      System.out.println();
+      spent += price;
+      bought++;
     }
+
+    System.out.printf("Куплено товаров: %d на сумму %.2f%n", bought, spent);
+    System.out.printf("Остаток бюджета: %.2f%n", budget - spent);
+    System.out.println("Не куплено: " + (prices.size() - bought));
   }
 }
